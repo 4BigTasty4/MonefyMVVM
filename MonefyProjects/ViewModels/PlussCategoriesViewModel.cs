@@ -45,25 +45,6 @@ namespace MonefyProjects.ViewModels
         }
 
 
-        private string _labelText;
-        public string LabelText
-        {
-            get { return _labelText; }
-            set { Set(ref _labelText, value); }
-        }
-
-        public RelayCommand<string> ChangeLabelTextCommand
-        {
-            get => new(
-                (param) =>
-                {
-                    var tmp = new StringBuilder(LabelText);
-                    tmp.Append(param);
-                    LabelText = tmp.ToString();
-                });
-
-        }
-
 
         public RelayCommand SavePlussMoney
         {

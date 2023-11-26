@@ -14,7 +14,7 @@ namespace MonefyProjects.Services.Classes
             _messenger = messenger;
         }
 
-        public void SendData<T>(T data) where T : IData
+        public void SendData<T>(T data)
         {
             _messenger.Send(new DataMessage()
             {

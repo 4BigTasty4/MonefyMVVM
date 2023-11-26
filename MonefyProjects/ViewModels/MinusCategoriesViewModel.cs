@@ -48,15 +48,6 @@ namespace MonefyProjects.ViewModels
             set { Set(ref _labelText, value); }
         }
 
-        public RelayCommand Enter
-        {
-            get => new(
-                () =>
-                {
-                    int amount = Convert.ToInt32(LabelText);
-                });
-        }
-
         public RelayCommand<string> ChangeLabelTextCommand
         {
             get => new(

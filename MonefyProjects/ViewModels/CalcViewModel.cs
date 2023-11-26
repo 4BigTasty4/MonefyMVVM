@@ -58,6 +58,16 @@ namespace MonefyProjects.ViewModels
             }
         }
 
+        public RelayCommand RemoveDigit
+        {
+            get => new(
+            () =>
+            {
+                LabelText = LabelText.Remove(LabelText.Length - 1, 1);
+            });
+        }
+
+
         public RelayCommand Open
         {
             get => new(
@@ -67,7 +77,6 @@ namespace MonefyProjects.ViewModels
                 _dataService.SendData(Data);
                 _navigationService.NavigateTo<HomeScreenViewModel>();
                 LabelText = string.Empty;
-
             });
 
         }

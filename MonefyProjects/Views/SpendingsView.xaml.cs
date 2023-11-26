@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Views;
+using MonefyProjects.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +18,16 @@ using System.Windows.Shapes;
 namespace MonefyProjects.Views
 {
     /// <summary>
-    /// Interaction logic for HomeScreenView.xaml
+    /// Interaction logic for SpendingsView.xaml
     /// </summary>
-    public partial class HomeScreenView : UserControl
+    public partial class SpendingsView : UserControl
     {
-        public HomeScreenView()
+        private object _navigationService;
+
+        public SpendingsView()
         {
             InitializeComponent();
         }
 
-        private void PieChart_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -63,6 +63,17 @@ namespace MonefyProjects.ViewModels
             }
         }
 
+        public RelayCommand RemoveDigit
+        {
+            get => new(
+            () =>
+            {
+                LabelText = LabelText.Remove(LabelText.Length - 1,1);
+
+            });
+        }
+
+
         public RelayCommand OpenCategoriesCommand
         {
             get => new(

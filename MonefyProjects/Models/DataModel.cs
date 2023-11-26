@@ -1,12 +1,21 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MonefyProjects.Views;
 using System;
 
 namespace MonefyProjects.Models
 {
     internal class DataModel : IData
     {
+        private DataModel item;
+
+        public DataModel()
+        {
+        }
+
+
+
         public string Cotegorie { get; set; }
-        public string Note { get; set; }
+        public string Name { get; set; }
         public string Color { get; set; }
         public DateTime TimeCreate { get; set; }
         public bool Income { get; set; }
@@ -20,12 +29,25 @@ namespace MonefyProjects.Models
                 }
                 return "Red";
             }
+            set { }
         }
         public double Money { get; set; }
 
-        public static implicit operator DataModel(RelayCommand<string> v)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{Name} {Money}";
+        }
+
+        public DataModel(DataModel item)
+        {
+            Cotegorie = item.Cotegorie;
+            Name = item.Name;
+            Color = item.Color;
+            TimeCreate = item.TimeCreate;
+            Income = item.Income;
+            IncomeColor = item.IncomeColor;
+            Money = item.Money;
+
         }
     }
 }

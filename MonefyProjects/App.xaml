@@ -37,7 +37,11 @@
                 <views:HomeScreenView/>
             </DataTemplate>
 
-            
+
+            <DataTemplate DataType="{x:Type viewModels:SpendingsViewModel}">
+                <views:SpendingsView/>
+            </DataTemplate>
+
 
 
             <ResourceDictionary.MergedDictionaries>

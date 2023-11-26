@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using LiveCharts;
 using MonefyProjects.Messages;
 using MonefyProjects.Models;
 using MonefyProjects.Services.Classes;
@@ -9,7 +10,9 @@ using MonefyProjects.Services.Interfaces;
 using MonefyProjects.Views;
 using System;
 using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace MonefyProjects.ViewModels
 {
@@ -17,7 +20,7 @@ namespace MonefyProjects.ViewModels
     {
         private string _sum = "0";
 
-        
+        private SeriesCollection _expenseDataSeries ;
 
         public string Sum
         {
@@ -25,15 +28,12 @@ namespace MonefyProjects.ViewModels
             set => Set(ref _sum, value);
         }
         public string Operation { get; set; }
-        private DataModel _data;
 
         private readonly IProjectNavigationService _navigationService;
         private readonly IDataService _dataService;
         private readonly IMessenger _messenger;
 
-        public DataModel MyCommand { get; private set; }
-
-
+        public List<DataModel> Spendings { get; set; }
 
         public HomeScreenViewModel(IProjectNavigationService navigationService, IDataService dataService, IMessenger messenger)
         {
@@ -42,20 +42,22 @@ namespace MonefyProjects.ViewModels
             _dataService = dataService;
             _messenger = messenger;
 
+            Spendings = new();
+
             _messenger.Register<DataMessage>(this, message =>
             {
-                if (message != null)
+                if (message.Data as DataModel != null)
                 {
-                    _data = message.Data as DataModel;
-                    if (Operation == "+") Sum = (Convert.ToDouble(_data.Money) + Convert.ToDouble(Sum)).ToString();
-                    if (Operation == "-") Sum = (Convert.ToDouble(_data.Money) + Convert.ToDouble(Sum)).ToString();
-                    if (Operation == ".") Sum = (Convert.ToDouble(_data.Money) + Convert.ToDouble(Sum)).ToString();
+                    var tmp = message.Data as DataModel;
+                    Spendings.Add(new DataModel(tmp));
+                    if (Operation == "+") Sum = (tmp.Money + Convert.ToDouble(Sum)).ToString();
+                    if (Operation == "-") Sum = (tmp.Money + Convert.ToDouble(Sum)).ToString();
+                    if (Operation == ".") Sum = (tmp.Money + Convert.ToDouble(Sum)).ToString();
                 }
             });
         }
 
-
-
+        
         public RelayCommand<string> OpenCalcCommand
         {
             get => new((param) =>
@@ -87,6 +89,13 @@ namespace MonefyProjects.ViewModels
         }
 
 
-
+        public RelayCommand ShowSpendings
+        {
+            get => new(() =>
+            {
+                _dataService.SendData(Spendings);
+                _navigationService.NavigateTo<SpendingsViewModel>();
+            });
+        }
     }
 }

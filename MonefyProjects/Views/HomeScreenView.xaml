@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:MonefyProjects.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:viewmodels="clr-namespace:MonefyProjects.ViewModels" 
-             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" d:DataContext="{d:DesignInstance Type=viewmodels:HomeScreenViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="500">
     <Grid>
         <ContentControl Content="{Binding CurrentView, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="50,0,50,0">
+
             <Button Command="{Binding OpenCalcCommand}" CommandParameter="+" Name="Plus" 
                     Style="{StaticResource MaterialDesignFloatingActionButton}" 
                     Width="100" Height="100" Grid.Row="1" Grid.Column="2" FontSize="30" 
@@ -39,17 +40,15 @@
         </StackPanel>
         <StackPanel Grid.Row ="3" Grid.Column="1" Margin="50,90,50,90" Grid.ColumnSpan="3" 
         Grid.RowSpan="2">
-            <Button Content="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#13f28e" Background="#13f28e" VerticalAlignment="Center"
+            <Button Command="{Binding ShowSpendings}"  Content="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#13f28e" Background="#13f28e" VerticalAlignment="Center"
         Width="200" Height="40" 
-        Style="{StaticResource MaterialDesignRaisedButton}" Command="{Binding ChangeListVisible}"/>
+        Style="{StaticResource MaterialDesignRaisedButton}"/>
         </StackPanel>
 
 
         <StackPanel Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="0,40,0,0">
 
-            <lvc:PieChart
-                Series="{Binding ExpenseDataSeries}"
-                Width="72"/>
+
 
             <Button
                     Command="{Binding OpenCalcCommand}"
@@ -171,7 +170,9 @@
                    Margin="0,-80,100,0">
                 <md:PackIcon Kind="ComputerClassic" Height="50" Width="40"/>
             </Button>
-
+            <lvc:PieChart
+            Series="{Binding ExpenseDataSeries}"
+            Width="168" Height="113"/>
 
         </StackPanel>
         <Grid.RowDefinitions >

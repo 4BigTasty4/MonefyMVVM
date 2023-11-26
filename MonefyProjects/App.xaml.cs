@@ -38,6 +38,7 @@ namespace MonefyProjects
             Container.RegisterSingleton<CalcPlussViewModel>();
             Container.RegisterSingleton<PlussCategoriesViewModel>();
             Container.RegisterSingleton<MinusCategoriesViewModel>();
+            Container.RegisterSingleton<SpendingsViewModel>();
 
             Container.Verify();
         }
